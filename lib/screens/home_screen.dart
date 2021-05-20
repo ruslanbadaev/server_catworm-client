@@ -27,27 +27,60 @@ class _MyHomePageState extends State<HomeScreen> {
     ThemeNotifier themeNotifier = Provider.of<ThemeNotifier>(context);
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("CAT WORM"),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                Navigator.pushNamed(context, "/add_scanner");
-              },
+      appBar: AppBar(
+        title: Text("CAT WORM"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.pushNamed(context, "/add_scanner");
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.lightbulb_outline_rounded),
+            onPressed: () {
+              themeNotifier.toggle();
+            },
+          ),
+        ],
+      ),
+      body: scannerNotifier != null
+          ? Container(
+              child: Column(
+                children: [
+                  InkWell(
+                      onTap: () => {},
+                      child: Card(
+                        child: Container(
+                          padding: EdgeInsets.all(24),
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            children: [Text('test')],
+                          ),
+                        ),
+                      )),
+                  InkWell(
+                      onTap: () => {},
+                      child: Card(
+                        child: Container(
+                          padding: EdgeInsets.all(24),
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            children: [Text('test')],
+                          ),
+                        ),
+                      )),
+                ],
+              ),
+            )
+          : Center(
+              child: CircularProgressIndicator(),
             ),
-            IconButton(
-              icon: Icon(Icons.lightbulb_outline_rounded),
-              onPressed: () {
-                themeNotifier.toggle();
-              },
-            ),
-          ],
-        ),
-        body: scannerNotifier != null
-            ? Container()
-            : Center(
-                child: CircularProgressIndicator(),
-              ));
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => {},
+        label: Text('Add server'),
+        icon: Icon(Icons.qr_code_2_rounded),
+      ),
+    );
   }
 }
