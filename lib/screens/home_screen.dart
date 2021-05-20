@@ -55,18 +55,10 @@ class _MyHomePageState extends State<HomeScreen> {
                           padding: EdgeInsets.all(24),
                           width: MediaQuery.of(context).size.width,
                           child: Column(
-                            children: [Text('test')],
-                          ),
-                        ),
-                      )),
-                  InkWell(
-                      onTap: () => {},
-                      child: Card(
-                        child: Container(
-                          padding: EdgeInsets.all(24),
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            children: [Text('test')],
+                            children: [
+                              Text('Server name'),
+                              Text('127.0.0.1'),
+                            ],
                           ),
                         ),
                       )),

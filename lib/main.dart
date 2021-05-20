@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
 import 'package:server_catworm/notifiers/theme_notifier.dart';
 import 'package:server_catworm/screens/scanner_screen.dart';
+import 'package:server_catworm/screens/terminal_screen.dart';
 import 'package:server_catworm/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -55,7 +56,10 @@ class MyAppState extends State<MyApp> {
       theme: themeNotifier.get() ? darkTheme : lightTheme,
       home: HomeScreen(title: 'CAT WORM'),
       routes: {
-        "/add_post": (context) => ScannerScreen(),
+        "/home": (context) => ScannerScreen(),
+        "/scanner": (context) => ScannerScreen(),
+        "/terminal": (context) => TerminalScreen(),
+        "/settings": (context) => ScannerScreen(),
       },
     );
   }
