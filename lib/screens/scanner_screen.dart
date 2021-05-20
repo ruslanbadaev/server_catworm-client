@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_port_scanner/models/scanner.dart';
-import 'package:flutter_port_scanner/notifiers/scanner_notifier.dart';
+import 'package:server_catworm/models/scanner.dart';
+import 'package:server_catworm/notifiers/scanner_notifier.dart';
 import 'package:provider/provider.dart';
 
 class ScannerScreen extends StatefulWidget {

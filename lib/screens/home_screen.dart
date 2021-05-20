@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_port_scanner/components/scanner/scanner_view.dart';
-import 'package:flutter_port_scanner/notifiers/scanner_notifier.dart';
-import 'package:flutter_port_scanner/notifiers/theme_notifier.dart';
-import 'package:flutter_port_scanner/services/scanner_service.dart';
+import 'package:server_catworm/components/scanner/scanner_view.dart';
+import 'package:server_catworm/notifiers/scanner_notifier.dart';
+import 'package:server_catworm/notifiers/theme_notifier.dart';
+import 'package:server_catworm/services/scanner_service.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,7 +28,7 @@ class _MyHomePageState extends State<HomeScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Scanner"),
+          title: Text("CAT WORM"),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),

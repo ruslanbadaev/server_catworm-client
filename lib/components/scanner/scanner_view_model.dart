@@ -1,4 +1,4 @@
-import 'package:flutter_port_scanner/models/scanner.dart';
+import 'package:server_catworm/models/scanner.dart';
 
 class ScannerViewModel {
   Scanner _scanner;

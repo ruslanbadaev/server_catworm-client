@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_port_scanner/notifiers/scanner_notifier.dart';
-import 'package:flutter_port_scanner/notifiers/theme_notifier.dart';
-import 'package:flutter_port_scanner/screens/scanner_screen.dart';
-import 'package:flutter_port_scanner/screens/home_screen.dart';
+import 'package:server_catworm/notifiers/scanner_notifier.dart';
+import 'package:server_catworm/notifiers/theme_notifier.dart';
+import 'package:server_catworm/screens/scanner_screen.dart';
+import 'package:server_catworm/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -50,9 +50,10 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     ThemeNotifier themeNotifier = Provider.of<ThemeNotifier>(context);
     return MaterialApp(
-      title: 'Port Scanner',
+      title: 'CAT WORM',
+      debugShowCheckedModeBanner: false,
       theme: themeNotifier.get() ? darkTheme : lightTheme,
-      home: HomeScreen(title: 'Port Scanner'),
+      home: HomeScreen(title: 'CAT WORM'),
       routes: {
         "/add_post": (context) => ScannerScreen(),
       },
