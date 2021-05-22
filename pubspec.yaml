@@ -1,6 +1,6 @@
 name: server_catworm
 
-description: simple port scanner
+description: mobile ssh client 
 publish_to: 'none'
 
 version: 1.0.0+1
