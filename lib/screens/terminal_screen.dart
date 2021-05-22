@@ -3,6 +3,8 @@ import 'package:xterm/flutter.dart';
 import 'package:xterm/xterm.dart';
 import 'package:server_catworm/models/scanner.dart';
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
+import 'package:server_catworm/notifiers/terminal_notifier.dart';
+import 'package:server_catworm/models/message.dart';
 import 'package:provider/provider.dart';
 
 class TerminalScreen extends StatefulWidget {
@@ -36,15 +38,30 @@ class TerminalScreenSate extends State<TerminalScreen> {
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
+    TerminalNotifier terminalNotifier = Provider.of<TerminalNotifier>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Scanner"),
+        title: Text("Terminal"),
       ),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            for (Message message in terminalNotifier.getMessages())
+              Container(
+                padding: EdgeInsets.all(4),
+                child: Text(
+                  '\$ ${message.message}',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             Container(
               child: Row(
                 children: [
@@ -68,6 +85,13 @@ class TerminalScreenSate extends State<TerminalScreen> {
                   IconButton(
                     onPressed: () => {
                       print(controller.text),
+                      terminalNotifier.addMessage(Message.fromMap({
+                        'id': 0,
+                        'message': controller.text,
+                        'type': 'input',
+                        'date': terminalNotifier.getDate(),
+                        'ip': '127.0.0.1'
+                      })),
                       controller.clear(),
                     },
                     icon: Icon(
