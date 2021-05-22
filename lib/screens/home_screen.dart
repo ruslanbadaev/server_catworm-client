@@ -49,7 +49,7 @@ class _MyHomePageState extends State<HomeScreen> {
               child: Column(
                 children: [
                   InkWell(
-                      onTap: () => {},
+                      onTap: () => {Navigator.pushNamed(context, "/terminal")},
                       child: Card(
                         child: Container(
                           padding: EdgeInsets.all(24),

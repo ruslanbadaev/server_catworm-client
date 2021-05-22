@@ -17,6 +17,10 @@ class ScannerScreenSate extends State<ScannerScreen> {
         appBar: AppBar(
           title: Text("Scanner"),
         ),
-        body: Container());
+        body: Container(
+          child: Column(
+            children: [TextField()],
+          ),
+        ));
   }
 }
