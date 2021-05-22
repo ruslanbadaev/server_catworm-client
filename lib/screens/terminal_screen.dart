@@ -42,33 +42,37 @@ class TerminalScreenSate extends State<TerminalScreen> {
         title: Text("Scanner"),
       ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
-              width: MediaQuery.of(context).size.width,
               child: Row(
                 children: [
-                  TextField(
-                    controller: controller,
-                    maxLines: 1,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: TextField(
+                      controller: controller,
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                      ),
+                      cursorColor: Colors.green,
+                      //cursorRadius: Radius.circular(16.0),
+                      autocorrect: false,
+                      cursorWidth: 8.0,
+                      onChanged: (onChanged) => {
+                        //print(onChanged),
+                      },
                     ),
-                    cursorColor: Colors.green,
-                    //cursorRadius: Radius.circular(16.0),
-                    autocorrect: false,
-                    cursorWidth: 8.0,
-                    onChanged: (onChanged) => {
-                      print(onChanged),
-                    },
                   ),
                   IconButton(
-                    onPressed: () => {},
+                    onPressed: () => {
+                      print(controller.text),
+                      controller.clear(),
+                    },
                     icon: Icon(
                       Icons.play_arrow_rounded,
+                      color: Colors.green,
                     ),
                   )
                 ],
