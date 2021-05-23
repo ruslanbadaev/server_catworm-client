@@ -15,6 +15,7 @@ class TerminalScreen extends StatefulWidget {
 }
 
 class TerminalScreenSate extends State<TerminalScreen> {
+  ScrollController _scrollController = ScrollController();
   /*  Terminal terminal;
 
   @override
@@ -49,24 +50,71 @@ class TerminalScreenSate extends State<TerminalScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            for (Message message in terminalNotifier.getMessages())
-              Container(
-                padding: EdgeInsets.all(4),
-                child: Text(
-                  '\$ ${message.message}',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+            Expanded(
+              //height: MediaQuery.of(context).size.height * 0.7,
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
+                    for (Message message in terminalNotifier.getMessages())
+                      Container(
+                        padding: EdgeInsets.all(4),
+                        child: Text(
+                          '\$ ${message.message}',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                FloatingActionButton.extended(
+                  onPressed: () => {},
+                  label: Text('Удалить'),
+                  backgroundColor: Colors.red,
+                ),
+                FloatingActionButton.extended(
+                  onPressed: () => {},
+                  label: Text('Сохранить'),
+                  backgroundColor: Colors.blue,
+                ),
+                FloatingActionButton.extended(
+                  onPressed: () => {
+                    print(controller.text),
+                    terminalNotifier.addMessage(Message.fromMap({
+                      'id': 0,
+                      'message': controller.text,
+                      'type': 'input',
+                      'date': terminalNotifier.getDate(),
+                      'ip': '127.0.0.1'
+                    })),
+                    controller.clear(),
+                    _scrollController.animateTo(
+                        _scrollController.position.maxScrollExtent,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.ease),
+                  },
+                  label: Text('Отправить'),
+                  backgroundColor: Colors.green,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 12,
+            ),
             Container(
               child: Row(
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
+                    width: MediaQuery.of(context).size.width /* * 0.8 */,
                     child: TextField(
                       controller: controller,
                       maxLines: 1,
@@ -82,7 +130,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                       },
                     ),
                   ),
-                  IconButton(
+                  /* IconButton(
                     onPressed: () => {
                       print(controller.text),
                       terminalNotifier.addMessage(Message.fromMap({
@@ -98,7 +146,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                       Icons.play_arrow_rounded,
                       color: Colors.green,
                     ),
-                  )
+                  ), */
                 ],
               ),
             ),
