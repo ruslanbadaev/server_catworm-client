@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class StorageService {
   getServerCards(ServerCardsNotifier notifier) {
-    List<Map> serverCards = [
+    List<Map<String, dynamic>> serverCards = [
       {
         'name': 'Test',
         'ip': '127.0.0.1:80',
@@ -38,7 +38,7 @@ class StorageService {
         'totalRAM': 4000,
       },
     ];
-    for (var item in serverCards) {
+    for (Map<String, dynamic> item in serverCards) {
       notifier.addItem(ServerCard.fromMap(item));
     }
   }

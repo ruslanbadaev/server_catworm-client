@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
 import 'package:server_catworm/notifiers/theme_notifier.dart';
 import 'package:server_catworm/notifiers/terminal_notifier.dart';
+import 'package:server_catworm/notifiers/server_cards_notifier.dart';
 import 'package:server_catworm/screens/scanner_screen.dart';
 import 'package:server_catworm/screens/terminal_screen.dart';
 import 'package:server_catworm/screens/home_screen.dart';
@@ -21,6 +22,9 @@ Future<void> main() async {
       ),
       ChangeNotifierProvider(
         create: (context) => TerminalNotifier(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => ServerCardsNotifier(),
       ),
     ],
     child: MyApp(),
