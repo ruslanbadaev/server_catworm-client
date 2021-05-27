@@ -41,7 +41,7 @@ class ServerCardViewState extends State<ServerCardView> {
                                     size: 14,
                                   ), */
                   Text(
-                    'Server name',
+                    serverCard.name,
                     style: TextStyle(
                       fontSize: 21,
                       fontWeight: FontWeight.bold,
@@ -50,7 +50,7 @@ class ServerCardViewState extends State<ServerCardView> {
                   /*  Container(), */
                 ],
               ),
-              Text('127.0.0.1'),
+              Text(serverCard.ip),
               Container(
                 width: double.infinity,
                 height: 1,
@@ -81,7 +81,7 @@ class ServerCardViewState extends State<ServerCardView> {
                               // Icon(Icons.memory_rounded),
                               Text('Total: '),
                               Text(
-                                ' 32mb',
+                                ' ${serverCard.currDisk}mb',
                                 style: TextStyle(
                                   color: Colors.orange,
                                   fontWeight: FontWeight.bold,
@@ -94,7 +94,7 @@ class ServerCardViewState extends State<ServerCardView> {
                               // Icon(Icons.cloud_upload_rounded),
                               Text('Percent: '),
                               Text(
-                                '82%',
+                                '${(serverCard.currDisk / serverCard.totalDisk) * 100}%',
                                 style: TextStyle(
                                   color: Colors.orange,
                                   fontWeight: FontWeight.bold,
@@ -122,7 +122,7 @@ class ServerCardViewState extends State<ServerCardView> {
                               // Icon(Icons.memory_rounded),
                               Text('Total: '),
                               Text(
-                                ' 32mb',
+                                ' ${serverCard.currCPU}mb',
                                 style: TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.bold,
@@ -135,7 +135,7 @@ class ServerCardViewState extends State<ServerCardView> {
                               // Icon(Icons.cloud_upload_rounded),
                               Text('Percent: '),
                               Text(
-                                '82%',
+                                '${(serverCard.currCPU / serverCard.totalCPU) * 100}%',
                                 style: TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.bold,
@@ -164,7 +164,7 @@ class ServerCardViewState extends State<ServerCardView> {
                             children: [
                               Text('Total: '),
                               Text(
-                                ' 123mb ',
+                                ' ${serverCard.totalRAM}mb ',
                                 style: TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold,
@@ -179,7 +179,7 @@ class ServerCardViewState extends State<ServerCardView> {
                             children: [
                               Text('Percent: '),
                               Text(
-                                ' 12% ',
+                                '${(serverCard.currRAM / serverCard.totalRAM) * 100}%',
                                 style: TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold,
