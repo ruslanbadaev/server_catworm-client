@@ -65,7 +65,7 @@ class ServerCardViewState extends State<ServerCardView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.25,
+                      width: MediaQuery.of(context).size.width * 0.28,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -81,7 +81,7 @@ class ServerCardViewState extends State<ServerCardView> {
                               // Icon(Icons.memory_rounded),
                               Text('Total: '),
                               Text(
-                                ' ${serverCard.currDisk}mb',
+                                ' ${serverCard.currDisk.toStringAsFixed(0)}mb',
                                 style: TextStyle(
                                   color: Colors.orange,
                                   fontWeight: FontWeight.bold,
@@ -94,7 +94,7 @@ class ServerCardViewState extends State<ServerCardView> {
                               // Icon(Icons.cloud_upload_rounded),
                               Text('Percent: '),
                               Text(
-                                '${(serverCard.currDisk / serverCard.totalDisk) * 100}%',
+                                '${((serverCard.currDisk / serverCard.totalDisk) * 100).toStringAsFixed(0)}%',
                                 style: TextStyle(
                                   color: Colors.orange,
                                   fontWeight: FontWeight.bold,
@@ -106,7 +106,7 @@ class ServerCardViewState extends State<ServerCardView> {
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.25,
+                      width: MediaQuery.of(context).size.width * 0.28,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -122,7 +122,7 @@ class ServerCardViewState extends State<ServerCardView> {
                               // Icon(Icons.memory_rounded),
                               Text('Total: '),
                               Text(
-                                ' ${serverCard.currCPU}mb',
+                                ' ${serverCard.currCPU.toStringAsFixed(0)}mb',
                                 style: TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.bold,
@@ -135,7 +135,7 @@ class ServerCardViewState extends State<ServerCardView> {
                               // Icon(Icons.cloud_upload_rounded),
                               Text('Percent: '),
                               Text(
-                                '${(serverCard.currCPU / serverCard.totalCPU) * 100}%',
+                                '${((serverCard.currCPU / serverCard.totalCPU) * 100).toStringAsFixed(0)}%',
                                 style: TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.bold,
@@ -147,7 +147,7 @@ class ServerCardViewState extends State<ServerCardView> {
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.25,
+                      width: MediaQuery.of(context).size.width * 0.28,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -164,7 +164,7 @@ class ServerCardViewState extends State<ServerCardView> {
                             children: [
                               Text('Total: '),
                               Text(
-                                ' ${serverCard.totalRAM}mb ',
+                                ' ${serverCard.totalRAM.toStringAsFixed(0)}mb ',
                                 style: TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold,
@@ -179,7 +179,7 @@ class ServerCardViewState extends State<ServerCardView> {
                             children: [
                               Text('Percent: '),
                               Text(
-                                '${(serverCard.currRAM / serverCard.totalRAM) * 100}%',
+                                '${((serverCard.currRAM / serverCard.totalRAM) * 100).toStringAsFixed(0)}%',
                                 style: TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold,
