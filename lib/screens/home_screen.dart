@@ -57,11 +57,13 @@ class _MyHomePageState extends State<HomeScreen> {
       ),
       body: scannerNotifier != null
           ? Container(
-              child: Column(
-                children: [
-                  for (ServerCard card in serverCardsNotifier.getAllItems())
-                    ServerCardView(serverCard: card)
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    for (ServerCard card in serverCardsNotifier.getAllItems())
+                      ServerCardView(serverCard: card)
+                  ],
+                ),
               ),
             )
           : Center(

@@ -55,6 +55,8 @@ class TerminalScreenSate extends State<TerminalScreen> {
               child: SingleChildScrollView(
                 controller: _scrollController,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     for (Message message in terminalNotifier.getMessages())
                       Container(
@@ -98,9 +100,9 @@ class TerminalScreenSate extends State<TerminalScreen> {
                     })),
                     controller.clear(),
                     _scrollController.animateTo(
-                        _scrollController.position.maxScrollExtent,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.ease),
+                        _scrollController.position.maxScrollExtent + 50,
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.bounceOut),
                   },
                   label: Text('Отправить'),
                   backgroundColor: Colors.green,

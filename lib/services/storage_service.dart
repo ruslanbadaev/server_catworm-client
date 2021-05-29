@@ -37,6 +37,36 @@ class StorageService {
         'currRAM': 2890,
         'totalRAM': 4000,
       },
+      {
+        'name': 'Test 3',
+        'ip': '127.0.0.1:8080',
+        'currDisk': 8500,
+        'totalDisk': 12000,
+        'currCPU': 88,
+        'totalCPU': 100,
+        'currRAM': 2890,
+        'totalRAM': 4000,
+      },
+      {
+        'name': 'Test 3',
+        'ip': '127.0.0.1:8080',
+        'currDisk': 8500,
+        'totalDisk': 12000,
+        'currCPU': 88,
+        'totalCPU': 100,
+        'currRAM': 2890,
+        'totalRAM': 4000,
+      },
+      {
+        'name': 'Test 3',
+        'ip': '127.0.0.1:8080',
+        'currDisk': 8500,
+        'totalDisk': 12000,
+        'currCPU': 88,
+        'totalCPU': 100,
+        'currRAM': 2890,
+        'totalRAM': 4000,
+      },
     ];
     for (Map<String, dynamic> item in serverCards) {
       notifier.addItem(ServerCard.fromMap(item));
