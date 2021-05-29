@@ -5,8 +5,11 @@ class ServerCardsNotifier with ChangeNotifier {
   List<ServerCard> _cards = [];
   Map<String, ServerCard> _cardsMap = {};
 
-  List<ServerCard> getAllItems() {
+/*   List<ServerCard> getAllItems() {
     return _cards;
+  } */
+  Map<String, ServerCard> getAllItems() {
+    return _cardsMap;
   }
 
   void addItems(List<ServerCard> items) {
@@ -19,8 +22,9 @@ class ServerCardsNotifier with ChangeNotifier {
     notifyListeners();
   }
 
-  void setItem(String ip, Map item) {
+  void setItem(String ip, Map<String, dynamic> item) {
     // _cards.add(item);
+
     _cardsMap[ip] = ServerCard.fromMap(item);
     notifyListeners();
   }

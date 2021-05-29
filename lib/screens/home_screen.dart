@@ -62,7 +62,8 @@ class _MyHomePageState extends State<HomeScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    for (ServerCard card in serverCardsNotifier.getAllItems())
+                    for (ServerCard card
+                        in serverCardsNotifier.getAllItems().values)
                       InkWell(
                         onTap: () => {
                           terminalNotifier.setCurrIp(card.ip),
