@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xterm/flutter.dart';
-import 'package:xterm/xterm.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:server_catworm/models/scanner.dart';
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
 import 'package:server_catworm/notifiers/terminal_notifier.dart';
@@ -75,7 +74,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                 ),
               ),
             ),
-            Row(
+            /* Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton.extended(
@@ -108,31 +107,64 @@ class TerminalScreenSate extends State<TerminalScreen> {
                   backgroundColor: Colors.green,
                 ),
               ],
-            ),
+            ), */
             SizedBox(
               height: 12,
             ),
-            Container(
-              child: Row(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width /* * 0.8 */,
-                    child: TextField(
-                      controller: controller,
-                      maxLines: 1,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+            Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actionExtentRatio: 0.25,
+              actions: <Widget>[
+                IconSlideAction(
+                  caption: 'Clear',
+                  color: Colors.red,
+                  icon: Icons.cleaning_services_rounded,
+                  onTap: () => {controller.text = ''},
+                ),
+              ],
+              secondaryActions: [
+                IconSlideAction(
+                  caption: 'Send',
+                  color: Colors.green,
+                  icon: Icons.play_arrow_rounded,
+                  onTap: () => {
+                    print(controller.text),
+                    terminalNotifier.addMessage(Message.fromMap({
+                      'id': 0,
+                      'message': controller.text,
+                      'type': 'input',
+                      'date': terminalNotifier.getDate(),
+                      'ip': '127.0.0.1'
+                    })),
+                    controller.clear(),
+                    _scrollController.animateTo(
+                        _scrollController.position.maxScrollExtent + 56,
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.bounceOut),
+                  },
+                ),
+              ],
+              child: Container(
+                child: Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width /* * 0.8 */,
+                      child: TextField(
+                        controller: controller,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        cursorColor: Colors.green,
+                        //cursorRadius: Radius.circular(16.0),
+                        autocorrect: false,
+                        cursorWidth: 8.0,
+                        onChanged: (onChanged) => {
+                          //print(onChanged),
+                        },
                       ),
-                      cursorColor: Colors.green,
-                      //cursorRadius: Radius.circular(16.0),
-                      autocorrect: false,
-                      cursorWidth: 8.0,
-                      onChanged: (onChanged) => {
-                        //print(onChanged),
-                      },
                     ),
-                  ),
-                  /* IconButton(
+                    /* IconButton(
                     onPressed: () => {
                       print(controller.text),
                       terminalNotifier.addMessage(Message.fromMap({
@@ -149,7 +181,8 @@ class TerminalScreenSate extends State<TerminalScreen> {
                       color: Colors.green,
                     ),
                   ), */
-                ],
+                  ],
+                ),
               ),
             ),
           ],
