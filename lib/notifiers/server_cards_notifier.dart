@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:server_catworm/models/server_card.dart';
+import 'package:server_catworm/components/server_card/server_card_view_model.dart';
 
 class ServerCardsNotifier with ChangeNotifier {
   List<ServerCard> _cards = [];
@@ -23,9 +24,11 @@ class ServerCardsNotifier with ChangeNotifier {
   }
 
   void setItem(String ip, Map<String, dynamic> item) {
-    // _cards.add(item);
-
+    //print(item);
     _cardsMap[ip] = ServerCard.fromMap(item);
+    //print(_cardsMap[ip].ip);
+/*     notifyListeners();
+    ServerCardViewModel().setServerCard(ServerCard.fromMap(item)); */
     notifyListeners();
   }
 }

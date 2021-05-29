@@ -9,6 +9,8 @@ class ServerCardView extends StatefulWidget {
 
   @override
   State createState() {
+    print(serverCard.currCPU);
+
     return ServerCardViewState(serverCard);
   }
 }
@@ -33,11 +35,6 @@ class ServerCardViewState extends State<ServerCardView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                /*       Icon(
-                                    Icons.circle,
-                                    color: Colors.green,
-                                    size: 14,
-                                  ), */
                 Text(
                   serverCard.name,
                   style: TextStyle(
@@ -45,7 +42,6 @@ class ServerCardViewState extends State<ServerCardView> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                /*  Container(), */
               ],
             ),
             Text(serverCard.ip),

@@ -13,6 +13,7 @@ import 'package:server_catworm/notifiers/server_cards_notifier.dart';
 import 'package:server_catworm/notifiers/theme_notifier.dart';
 import 'package:server_catworm/notifiers/terminal_notifier.dart';
 import 'package:server_catworm/services/storage_service.dart';
+import 'package:server_catworm/services/loop_service.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,6 +30,7 @@ class _MyHomePageState extends State<HomeScreen> {
     ServerCardsNotifier serverCardsNotifier =
         Provider.of<ServerCardsNotifier>(context, listen: false);
     StorageService().getServerCards(serverCardsNotifier);
+    LoopService.startLoop(serverCardsNotifier);
     super.initState();
   }
 

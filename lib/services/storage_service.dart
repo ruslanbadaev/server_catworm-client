@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class StorageService {
   getServerCards(ServerCardsNotifier notifier) {
-    List<String> ips = ['127.0.0.1:80', '127.0.0.1:3000', '127.0.0.1:8080'];
+    List<String> ips = getIPs();
     Map<String, Map<String, dynamic>> serverCardsMap = {
       '127.0.0.1:80': {
         'name': 'Test',
@@ -46,7 +46,14 @@ class StorageService {
       notifier.addItem(ServerCard.fromMap(item));
     } */
   }
+
+  static List<String> getIPs() {
+    List<String> ips = ['127.0.0.1:80', '127.0.0.1:3000', '127.0.0.1:8080'];
+    return ips;
+  }
 }
+
+
 
 
 

@@ -5,6 +5,8 @@ class ServerCardViewModel {
   ServerCard _serverCard;
 
   setServerCard(ServerCard serverCard) {
+    print(serverCard.currCPU);
+
     _serverCard = serverCard;
   }
 
