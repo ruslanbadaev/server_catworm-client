@@ -11,6 +11,7 @@ import 'package:server_catworm/models/server_card.dart';
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
 import 'package:server_catworm/notifiers/server_cards_notifier.dart';
 import 'package:server_catworm/notifiers/theme_notifier.dart';
+import 'package:server_catworm/notifiers/terminal_notifier.dart';
 import 'package:server_catworm/services/storage_service.dart';
 import 'package:provider/provider.dart';
 
@@ -35,6 +36,7 @@ class _MyHomePageState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     ScannersNotifier scannerNotifier = Provider.of<ScannersNotifier>(context);
     ThemeNotifier themeNotifier = Provider.of<ThemeNotifier>(context);
+    TerminalNotifier terminalNotifier = Provider.of<TerminalNotifier>(context);
     ServerCardsNotifier serverCardsNotifier =
         Provider.of<ServerCardsNotifier>(context);
     return Scaffold(
@@ -61,7 +63,13 @@ class _MyHomePageState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     for (ServerCard card in serverCardsNotifier.getAllItems())
-                      ServerCardView(serverCard: card)
+                      InkWell(
+                        onTap: () => {
+                          terminalNotifier.setCurrIp(card.ip),
+                          Navigator.pushNamed(context, "/terminal"),
+                        },
+                        child: ServerCardView(serverCard: card),
+                      )
                   ],
                 ),
               ),

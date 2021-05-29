@@ -15,25 +15,6 @@ class TerminalScreen extends StatefulWidget {
 
 class TerminalScreenSate extends State<TerminalScreen> {
   ScrollController _scrollController = ScrollController();
-  /*  Terminal terminal;
-
-  @override
-  void initState() {
-    super.initState();
-    terminal = Terminal(onInput: onInput);
-    terminal.write('xterm.dart demo');
-    terminal.write('\r\n');
-    terminal.write('\$ ');
-  }
-
-  void onInput(String input) {
-    if (input == '\r') {
-      terminal.write('\r\n');
-      terminal.write('\$ ');
-    } else {
-      terminal.write(input);
-    }  TerminalView(terminal: terminal)
-  } */
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +31,15 @@ class TerminalScreenSate extends State<TerminalScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              //height: MediaQuery.of(context).size.height * 0.7,
               child: SingleChildScrollView(
                 controller: _scrollController,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    for (Message message in terminalNotifier.getMessages())
+                    for (Message message in terminalNotifier.getMessages(
+                      terminalNotifier.getCurrIp(),
+                    ))
                       Container(
                         padding: EdgeInsets.all(4),
                         child: Text(
@@ -74,43 +56,6 @@ class TerminalScreenSate extends State<TerminalScreen> {
                 ),
               ),
             ),
-            /* Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                FloatingActionButton.extended(
-                  onPressed: () => {},
-                  label: Text('Удалить'),
-                  backgroundColor: Colors.red,
-                ),
-                FloatingActionButton.extended(
-                  onPressed: () => {},
-                  label: Text('Сохранить'),
-                  backgroundColor: Colors.blue,
-                ),
-                FloatingActionButton.extended(
-                  onPressed: () => {
-                    print(controller.text),
-                    terminalNotifier.addMessage(Message.fromMap({
-                      'id': 0,
-                      'message': controller.text,
-                      'type': 'input',
-                      'date': terminalNotifier.getDate(),
-                      'ip': '127.0.0.1'
-                    })),
-                    controller.clear(),
-                    _scrollController.animateTo(
-                        _scrollController.position.maxScrollExtent + 50,
-                        duration: Duration(milliseconds: 300),
-                        curve: Curves.bounceOut),
-                  },
-                  label: Text('Отправить'),
-                  backgroundColor: Colors.green,
-                ),
-              ],
-            ), */
-            SizedBox(
-              height: 12,
-            ),
             Slidable(
               actionPane: SlidableDrawerActionPane(),
               actionExtentRatio: 0.25,
@@ -119,7 +64,9 @@ class TerminalScreenSate extends State<TerminalScreen> {
                   caption: 'Clear',
                   color: Colors.red,
                   icon: Icons.cleaning_services_rounded,
-                  onTap: () => {controller.text = ''},
+                  onTap: () => {
+                    controller.text = '',
+                  },
                 ),
               ],
               secondaryActions: [
@@ -129,13 +76,18 @@ class TerminalScreenSate extends State<TerminalScreen> {
                   icon: Icons.play_arrow_rounded,
                   onTap: () => {
                     print(controller.text),
-                    terminalNotifier.addMessage(Message.fromMap({
-                      'id': 0,
-                      'message': controller.text,
-                      'type': 'input',
-                      'date': terminalNotifier.getDate(),
-                      'ip': '127.0.0.1'
-                    })),
+                    terminalNotifier.addMessage(
+                      Message.fromMap(
+                        {
+                          'id': 0,
+                          'message': controller.text,
+                          'type': 'input',
+                          'date': terminalNotifier.getDate(),
+                          'ip': '127.0.0.1'
+                        },
+                      ),
+                      terminalNotifier.getCurrIp(),
+                    ),
                     controller.clear(),
                     _scrollController.animateTo(
                         _scrollController.position.maxScrollExtent + 56,
@@ -148,7 +100,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                 child: Row(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width /* * 0.8 */,
+                      width: MediaQuery.of(context).size.width,
                       child: TextField(
                         controller: controller,
                         maxLines: 1,
@@ -156,31 +108,11 @@ class TerminalScreenSate extends State<TerminalScreen> {
                           border: OutlineInputBorder(),
                         ),
                         cursorColor: Colors.green,
-                        //cursorRadius: Radius.circular(16.0),
                         autocorrect: false,
                         cursorWidth: 8.0,
-                        onChanged: (onChanged) => {
-                          //print(onChanged),
-                        },
+                        onChanged: (onChanged) => {},
                       ),
                     ),
-                    /* IconButton(
-                    onPressed: () => {
-                      print(controller.text),
-                      terminalNotifier.addMessage(Message.fromMap({
-                        'id': 0,
-                        'message': controller.text,
-                        'type': 'input',
-                        'date': terminalNotifier.getDate(),
-                        'ip': '127.0.0.1'
-                      })),
-                      controller.clear(),
-                    },
-                    icon: Icon(
-                      Icons.play_arrow_rounded,
-                      color: Colors.green,
-                    ),
-                  ), */
                   ],
                 ),
               ),
@@ -188,12 +120,6 @@ class TerminalScreenSate extends State<TerminalScreen> {
           ],
         ),
       ),
-/*
-       floatingActionButton: FloatingActionButton(
-        onPressed: () => {print(controller.text), controller.clear()},
-        child: Icon(Icons.play_arrow_rounded),
-      ), 
-*/
     );
   }
 }
