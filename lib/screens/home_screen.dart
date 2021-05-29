@@ -46,7 +46,7 @@ class _MyHomePageState extends State<HomeScreen> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Navigator.pushNamed(context, "/add_scanner");
+              Navigator.pushNamed(context, "/scanner");
             },
           ),
           IconButton(
