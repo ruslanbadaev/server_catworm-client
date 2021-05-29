@@ -19,7 +19,7 @@ class ScannerScreenSate extends State<ScannerScreen> {
         ),
         body: Container(
           child: Column(
-            children: [TextField()],
+            children: [],
           ),
         ));
   }
