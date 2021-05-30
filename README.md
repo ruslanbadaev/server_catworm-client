@@ -4,7 +4,7 @@
 <hr>
 </br>
 <b> server monitoring </b>
-<img src="/screenshots/src1.png">
+<img src="./screenshots/src1.png">
 </br>
 <b> light theme for the perverts </b>
-<img src="/screenshots/src2.png">
+<img src="./screenshots/src2.png">
