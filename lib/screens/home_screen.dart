@@ -83,7 +83,9 @@ class _MyHomePageState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => {},
         label: Text('Add server'),
-        icon: Icon(Icons.qr_code_2_rounded),
+        icon: Icon(
+          Icons.qr_code_2_rounded,
+        ),
       ),
     );
   }
