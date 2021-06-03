@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:server_catworm/models/scanner.dart';
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
 import 'package:server_catworm/notifiers/terminal_notifier.dart';
@@ -59,7 +60,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                 ),
               ),
             ),
-            Slidable(
+            /* Slidable(
               actionPane: SlidableDrawerActionPane(),
               actionExtentRatio: 0.25,
               actions: <Widget>[
@@ -68,7 +69,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                   color: Colors.red,
                   icon: Icons.cleaning_services_rounded,
                   onTap: () => {
-                    controller.text = '',
+                    //controller.text = '',
                   },
                 ),
               ],
@@ -106,7 +107,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                       ),
                       terminalNotifier.getCurrIp(),
                     ),
-                    controller.clear(),
+                    //controller.clear(),
                     _scrollController.animateTo(
                         _scrollController.position.maxScrollExtent + 56,
                         duration: Duration(milliseconds: 300),
@@ -114,7 +115,12 @@ class TerminalScreenSate extends State<TerminalScreen> {
                   },
                 ),
               ],
-              child: Container(
+              child:  */
+
+            SlidingUpPanel(
+              backdropColor: Colors.black,
+              color: Colors.black,
+              panel: Container(
                 child: Row(
                   children: [
                     Container(
@@ -135,6 +141,27 @@ class TerminalScreenSate extends State<TerminalScreen> {
                 ),
               ),
             ),
+            //body:
+            /*  Container(
+                child: Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextField(
+                        controller: controller,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        cursorColor: Colors.green,
+                        autocorrect: false,
+                        cursorWidth: 8.0,
+                        onChanged: (onChanged) => {},
+                      ),
+                    ),
+                  ],
+                ),
+              ), */
           ],
         ),
       ),
