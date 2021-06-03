@@ -18,9 +18,7 @@ class ScannerScreenSate extends State<ScannerScreen> {
   void _onQRViewCreated(QRViewController controller) {
     controller = controller;
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
+      if (scanData != null) print(scanData);
     });
   }
 
@@ -31,15 +29,26 @@ class ScannerScreenSate extends State<ScannerScreen> {
           title: Text("Scanner"),
         ),
         body: Container(
-          child: Column(
+          child: Stack(
             children: [
               Container(
-                height: 200,
-                width: 200,
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
                 child: QRView(
                   key: qrKey,
                   onQRViewCreated: _onQRViewCreated,
+                  overlay: QrScannerOverlayShape(
+                      borderColor: Colors.red,
+                      borderRadius: 10,
+                      borderLength: 30,
+                      borderWidth: 10,
+                      cutOutSize: 300),
                 ),
+              ),
+              Align(
+                widthFactor: 5,
+                heightFactor: 3,
+                child: Text('Scan QR code from your server'),
               ),
             ],
           ),
