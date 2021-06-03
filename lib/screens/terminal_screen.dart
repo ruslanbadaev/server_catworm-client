@@ -17,10 +17,9 @@ class TerminalScreen extends StatefulWidget {
 
 class TerminalScreenSate extends State<TerminalScreen> {
   ScrollController _scrollController = ScrollController();
-
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
     TerminalNotifier terminalNotifier = Provider.of<TerminalNotifier>(context);
 
     return Scaffold(
@@ -43,6 +42,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                       terminalNotifier.getCurrIp(),
                     ))
                       Container(
+                        width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.all(4),
                         child: Text(
                           '\$ ${message.message}',
@@ -118,26 +118,139 @@ class TerminalScreenSate extends State<TerminalScreen> {
               child:  */
 
             SlidingUpPanel(
-              backdropColor: Colors.black,
-              color: Colors.black,
-              panel: Container(
-                child: Row(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: TextField(
-                        controller: controller,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                        cursorColor: Colors.green,
-                        autocorrect: false,
-                        cursorWidth: 8.0,
-                        onChanged: (onChanged) => {},
-                      ),
+              //backdropColor: Colors.black,
+              //color: Colors.black,
+              panel: Scaffold(
+                body: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(.1), spreadRadius: 3)
+                    ],
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      bottomLeft: Radius.circular(15),
                     ),
-                  ],
+                    // color: Colors.deepPurple,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: TextField(
+                          controller: controller,
+                          maxLines: 1,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                          cursorColor: Colors.green,
+                          autocorrect: false,
+                          cursorWidth: 8.0,
+                          onChanged: (onChanged) => {
+                            //controller.text = '',
+                          },
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(12),
+                            child: RaisedButton(
+                              padding: EdgeInsets.all(24),
+                              color: Colors.red,
+                              elevation: 12,
+                              focusElevation: 14,
+                              hoverElevation: 14,
+                              highlightElevation: 18,
+                              disabledElevation: 0,
+                              onPressed: () {
+                                controller.text = '';
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(Icons.cleaning_services_rounded),
+                                  Text(
+                                    '  Clear  ',
+                                    style: TextStyle(fontSize: 21),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.drag_handle_rounded,
+                            size: 32,
+                          ),
+                          Container(
+                            margin: EdgeInsets.all(12),
+                            child: RaisedButton(
+                              padding: EdgeInsets.all(24),
+                              color: Colors.green,
+                              elevation: 12,
+                              focusElevation: 14,
+                              hoverElevation: 14,
+                              highlightElevation: 18,
+                              disabledElevation: 0,
+                              onPressed: () async {
+                                print(controller.text);
+                                terminalNotifier.addMessage(
+                                  Message.fromMap(
+                                    {
+                                      'id': 0,
+                                      'message': controller.text,
+                                      'type': 'input',
+                                      'date': terminalNotifier.getDate(),
+                                      'ip': terminalNotifier.getCurrIp()
+                                    },
+                                  ),
+                                  terminalNotifier.getCurrIp(),
+                                );
+                                terminalNotifier.addMessage(
+                                  Message.fromMap(
+                                    {
+                                      'id': 0,
+                                      'message':
+                                          await NetworkService.execRequest(
+                                              controller.text,
+                                              terminalNotifier.getCurrIp(),
+                                              terminalNotifier.getCurrToken()),
+                                      'type': 'output',
+                                      'date': terminalNotifier.getDate(),
+                                      'ip': terminalNotifier.getCurrIp()
+                                    },
+                                  ),
+                                  terminalNotifier.getCurrIp(),
+                                );
+                                controller.clear();
+                                _scrollController.animateTo(
+                                    _scrollController.position.maxScrollExtent +
+                                        56,
+                                    duration: Duration(milliseconds: 300),
+                                    curve: Curves.bounceOut);
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(Icons.play_arrow_rounded),
+                                  Text(
+                                    '  Send  ',
+                                    style: TextStyle(fontSize: 21),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                floatingActionButton: FloatingActionButton.extended(
+                  onPressed: () => {},
+                  label: Text('Add command button'),
+                  icon: Icon(Icons.add_box_rounded),
                 ),
               ),
             ),
