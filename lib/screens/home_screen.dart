@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:server_catworm/components/server_card/server_card_view.dart';
 import 'package:server_catworm/models/server_card.dart';
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
@@ -41,6 +41,7 @@ class _MyHomePageState extends State<HomeScreen> {
     TerminalNotifier terminalNotifier = Provider.of<TerminalNotifier>(context);
     ServerCardsNotifier serverCardsNotifier =
         Provider.of<ServerCardsNotifier>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("CAT WORM"),
@@ -72,7 +73,7 @@ class _MyHomePageState extends State<HomeScreen> {
                           Navigator.pushNamed(context, "/terminal"),
                         },
                         child: ServerCardView(serverCard: card),
-                      )
+                      ),
                   ],
                 ),
               ),
