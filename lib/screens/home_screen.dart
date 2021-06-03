@@ -14,6 +14,7 @@ import 'package:server_catworm/notifiers/theme_notifier.dart';
 import 'package:server_catworm/notifiers/terminal_notifier.dart';
 import 'package:server_catworm/services/storage_service.dart';
 import 'package:server_catworm/services/loop_service.dart';
+import 'package:server_catworm/services/network_service.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -83,7 +84,8 @@ class _MyHomePageState extends State<HomeScreen> {
             ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => {
-          Navigator.pushNamed(context, "/scanner"),
+          NetworkService.execRequest()
+          //Navigator.pushNamed(context, "/scanner"),
         },
         label: Text('Add server'),
         icon: Icon(
