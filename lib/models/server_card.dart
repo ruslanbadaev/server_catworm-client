@@ -7,6 +7,7 @@ class ServerCard {
   int totalCPU;
   int currRAM;
   int totalRAM;
+  String token;
   ServerCard();
   ServerCard.fromMap(Map<String, dynamic> data) {
     name = data['name'];
@@ -17,6 +18,7 @@ class ServerCard {
     totalCPU = data['totalCPU'];
     currRAM = data['currRAM'];
     totalRAM = data['totalRAM'];
+    token = data['token'];
   }
 
   Map<String, dynamic> toMap() {
@@ -29,6 +31,7 @@ class ServerCard {
       'totalCPU': totalCPU,
       'currRAM': currRAM,
       'totalRAM': totalRAM,
+      'token': token,
     };
   }
 }
