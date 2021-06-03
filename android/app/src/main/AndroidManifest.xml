@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.shubhamchhimpa.server_catworm_client">
+    package="io.github.ruslanbadaev.server_catworm_client">
    <application
         android:label="server_catworm_client"
         android:icon="@mipmap/ic_launcher">

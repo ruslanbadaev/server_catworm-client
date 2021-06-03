@@ -71,6 +71,7 @@ class _MyHomePageState extends State<HomeScreen> {
                       InkWell(
                         onTap: () => {
                           terminalNotifier.setCurrIp(card.ip),
+                          terminalNotifier.setCurrToken(card.token),
                           Navigator.pushNamed(context, "/terminal"),
                         },
                         child: ServerCardView(serverCard: card),
@@ -84,8 +85,8 @@ class _MyHomePageState extends State<HomeScreen> {
             ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => {
-          NetworkService.execRequest()
-          //Navigator.pushNamed(context, "/scanner"),
+          //NetworkService.execRequest()
+          Navigator.pushNamed(context, "/scanner"),
         },
         label: Text('Add server'),
         icon: Icon(

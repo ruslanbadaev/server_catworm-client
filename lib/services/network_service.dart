@@ -9,23 +9,24 @@ import 'package:http/http.dart' as http;
 Random random = new Random();
 
 class NetworkService {
-  static execRequest(/* ServerCardsNotifier notifier, script, ip */) async {
+  static Future<String> execRequest(script, ip, token) async {
     var headers = {
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcCI6IjEzNC4wLjExNy4zMyIsImtleSI6IjU4NDBmNzMwOWJhZjgyNWQ2N2M5MzEwMjBmNzFjNzE0YmE0NTE5NDEiLCJpYXQiOjE2MjI3NTA5MDV9.gyRMGXshG0BX_Zj-YhVdhHm6aZl7qz-s64CLWbHOCDw',
+      'Authorization': 'Bearer $token',
       'Content-Type': 'application/json'
     };
-    var request =
-        http.Request('POST', Uri.parse('http://134.0.117.33:666/script'));
-    request.body = json.encode({"script": "node -v"});
+    var request = http.Request('POST', Uri.parse('http://$ip/script'));
+    request.body = json.encode({"script": script});
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      String resp = await response.stream.bytesToString();
+      print(resp);
+      return json.decode(resp)['message'];
     } else {
       print(response.reasonPhrase);
+      return response.reasonPhrase;
     }
   }
 }

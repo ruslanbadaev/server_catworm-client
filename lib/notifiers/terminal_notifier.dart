@@ -5,6 +5,7 @@ import 'package:server_catworm/services/scanner_service.dart';
 class TerminalNotifier with ChangeNotifier {
   Map<String, List<Message>> _messages = {};
   String _currIp = '';
+  String _currToken = '';
   void addMessage(Message message, String ip) {
     if (_messages[ip] == null) _messages[ip] = [];
     _messages[ip].add(message);
@@ -28,7 +29,16 @@ class TerminalNotifier with ChangeNotifier {
     notifyListeners();
   }
 
+  void setCurrToken(String token) {
+    _currToken = token;
+    notifyListeners();
+  }
+
   String getCurrIp() {
     return _currIp;
+  }
+
+  String getCurrToken() {
+    return _currToken;
   }
 }

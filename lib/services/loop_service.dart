@@ -10,7 +10,7 @@ Random random = new Random();
 
 class LoopService {
   static startLoop(ServerCardsNotifier notifier) {
-    Timer.periodic(new Duration(seconds: 3), (timer) {
+/*     Timer.periodic(new Duration(seconds: 3), (timer) {
       print('start loop');
       List<String> ips = StorageService.getIPs();
 
@@ -19,19 +19,19 @@ class LoopService {
         item['ip'] = ip;
         notifier.setItem(ip, getItem());
       }
-    });
+    }); */
   }
 
   static Map<String, dynamic> getItem() {
     return {
-      'name': 'Test 3',
+/*       'name': 'Test 3',
       'ip': '127.0.0.1:8080',
       'currDisk': random.nextInt(12000),
       'totalDisk': 12000,
       'currCPU': random.nextInt(100),
       'totalCPU': 100,
       'currRAM': random.nextInt(4000),
-      'totalRAM': 4000,
+      'totalRAM': 4000, */
     };
   }
 }

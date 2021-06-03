@@ -4,6 +4,7 @@ import 'package:server_catworm/models/scanner.dart';
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
 import 'package:server_catworm/notifiers/terminal_notifier.dart';
 import 'package:server_catworm/models/message.dart';
+import 'package:server_catworm/services/network_service.dart';
 import 'package:provider/provider.dart';
 
 class TerminalScreen extends StatefulWidget {
@@ -46,7 +47,9 @@ class TerminalScreenSate extends State<TerminalScreen> {
                           '\$ ${message.message}',
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            color: Colors.green,
+                            color: message.type == 'output'
+                                ? Colors.green
+                                : Colors.blue,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -74,7 +77,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                   caption: 'Send',
                   color: Colors.green,
                   icon: Icons.play_arrow_rounded,
-                  onTap: () => {
+                  onTap: () async => {
                     print(controller.text),
                     terminalNotifier.addMessage(
                       Message.fromMap(
@@ -83,7 +86,22 @@ class TerminalScreenSate extends State<TerminalScreen> {
                           'message': controller.text,
                           'type': 'input',
                           'date': terminalNotifier.getDate(),
-                          'ip': '127.0.0.1'
+                          'ip': terminalNotifier.getCurrIp()
+                        },
+                      ),
+                      terminalNotifier.getCurrIp(),
+                    ),
+                    terminalNotifier.addMessage(
+                      Message.fromMap(
+                        {
+                          'id': 0,
+                          'message': await NetworkService.execRequest(
+                              controller.text,
+                              terminalNotifier.getCurrIp(),
+                              terminalNotifier.getCurrToken()),
+                          'type': 'output',
+                          'date': terminalNotifier.getDate(),
+                          'ip': terminalNotifier.getCurrIp()
                         },
                       ),
                       terminalNotifier.getCurrIp(),
