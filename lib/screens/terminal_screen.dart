@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
 import 'package:server_catworm/models/scanner.dart';
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
 import 'package:server_catworm/notifiers/terminal_notifier.dart';
 import 'package:server_catworm/models/message.dart';
 import 'package:server_catworm/services/network_service.dart';
-import 'package:provider/provider.dart';
 
 class TerminalScreen extends StatefulWidget {
   @override
@@ -102,12 +105,12 @@ class TerminalScreenSate extends State<TerminalScreen> {
                           child: Text(
                             '\$ ${message.message}',
                             textAlign: TextAlign.start,
-                            style: TextStyle(
+                            style: GoogleFonts.jura(
                               color: message.type == 'output'
                                   ? Colors.green
                                   : Colors.blue,
+                              fontWeight: FontWeight.bold,
                               fontSize: 18,
-                              //fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
