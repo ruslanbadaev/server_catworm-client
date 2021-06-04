@@ -31,10 +31,15 @@ class TerminalScreenSate extends State<TerminalScreen> {
             width: MediaQuery.of(context).size.width,
             child: Row(
               children: [
+                SizedBox(
+                  width: 12,
+                ),
                 Container(
                   width: 33,
                   child: IconButton(
-                    onPressed: () => {},
+                    onPressed: () => {
+                      print('close app'),
+                    },
                     icon: Icon(
                       Icons.circle,
                       color: Colors.red,
@@ -73,35 +78,6 @@ class TerminalScreenSate extends State<TerminalScreen> {
           ),
         ],
         automaticallyImplyLeading: false,
-        /*  leading: Container(
-          width: 100,
-          child: Row(
-            children: [
-              Container(
-                width: 33,
-                child: IconButton(
-                  onPressed: () => {},
-                  icon: Icon(
-                    Icons.circle,
-                    color: Colors.red,
-                    size: 16,
-                  ),
-                ),
-              ),
-              Container(
-                width: 25,
-                child: IconButton(
-                  onPressed: () => {},
-                  icon: Icon(
-                    Icons.circle,
-                    color: Colors.orangeAccent,
-                    size: 16,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ), */
       ),
       body: Container(
         child: Column(
@@ -111,29 +87,40 @@ class TerminalScreenSate extends State<TerminalScreen> {
             Expanded(
               child: SingleChildScrollView(
                 controller: _scrollController,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    for (Message message in terminalNotifier.getMessages(
-                      terminalNotifier.getCurrIp(),
-                    ))
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.all(4),
-                        child: Text(
-                          '\$ ${message.message}',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            color: message.type == 'output'
-                                ? Colors.lightGreenAccent
-                                : Colors.lightBlueAccent,
-                            fontSize: 18,
-                            //fontWeight: FontWeight.bold,
+                child: Container(
+                  margin: EdgeInsets.all(8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (Message message in terminalNotifier.getMessages(
+                        terminalNotifier.getCurrIp(),
+                      ))
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.all(4),
+                          child: Text(
+                            '\$ ${message.message}',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              color: message.type == 'output'
+                                  ? Colors.green
+                                  : Colors.blue,
+                              fontSize: 18,
+                              //fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
+                      Text(
+                        '> ',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
                       ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -195,7 +182,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
               child:  */
 
             SlidingUpPanel(
-              minHeight: 60,
+              minHeight: 68,
               //backdropColor: Colors.black,
               //color: Colors.black,
               panel: Scaffold(
@@ -222,7 +209,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                         actions: <Widget>[
                           IconSlideAction(
                             caption: 'Clear',
-                            color: Colors.red,
+                            color: Colors.redAccent,
                             icon: Icons.cleaning_services_rounded,
                             onTap: () => {
                               controller.text = '',
@@ -269,16 +256,20 @@ class TerminalScreenSate extends State<TerminalScreen> {
                                       56,
                                   duration: Duration(milliseconds: 300),
                                   curve: Curves.bounceOut),
+                              controller.text = '',
                             },
                           ),
                         ],
                         child: Container(
                           width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.all(8),
                           child: TextField(
                             controller: controller,
                             maxLines: 1,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                              prefixIcon: Icon(Icons.code_rounded),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16)),
                             ),
                             cursorColor: Colors.green,
                             autocorrect: false,
