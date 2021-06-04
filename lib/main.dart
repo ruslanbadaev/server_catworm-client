@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
 
@@ -43,28 +44,27 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  final darkTheme = ThemeData(
-    primarySwatch: Colors.grey,
-    primaryColor: Colors.grey[900],
-    brightness: Brightness.dark,
-    backgroundColor: const Color(0xFF212121),
-    accentColor: Colors.white,
-    accentIconTheme: IconThemeData(color: Colors.black),
-    dividerColor: Colors.black12,
-  );
-
-  final lightTheme = ThemeData(
-    primarySwatch: Colors.grey,
-    primaryColor: Colors.white,
-    brightness: Brightness.light,
-    backgroundColor: const Color(0xFFE5E5E5),
-    accentColor: Colors.black,
-    accentIconTheme: IconThemeData(color: Colors.white),
-    dividerColor: Colors.white54,
-  );
-
   @override
   Widget build(BuildContext context) {
+    final darkTheme = ThemeData(
+      primarySwatch: Colors.grey,
+      primaryColor: Colors.grey[900],
+      brightness: Brightness.dark,
+      backgroundColor: const Color(0xFF212121),
+      accentColor: Colors.white,
+      accentIconTheme: IconThemeData(color: Colors.black),
+      dividerColor: Colors.black12,
+    );
+
+    final lightTheme = ThemeData(
+      primarySwatch: Colors.grey,
+      primaryColor: Colors.white,
+      brightness: Brightness.light,
+      backgroundColor: const Color(0xFFE5E5E5),
+      accentColor: Colors.black,
+      accentIconTheme: IconThemeData(color: Colors.white),
+      dividerColor: Colors.white54,
+    );
     ThemeNotifier themeNotifier = Provider.of<ThemeNotifier>(context);
     return MaterialApp(
       title: 'CAT WORM',
