@@ -24,7 +24,81 @@ class TerminalScreenSate extends State<TerminalScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Terminal"),
+        //title: Text("Terminal"),
+        actions: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              children: [
+                Container(
+                  width: 33,
+                  child: IconButton(
+                    onPressed: () => {},
+                    icon: Icon(
+                      Icons.circle,
+                      color: Colors.red,
+                      size: 18,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 33,
+                  child: IconButton(
+                    onPressed: () => {},
+                    icon: Icon(
+                      Icons.circle,
+                      color: Colors.orangeAccent,
+                      size: 18,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 33,
+                  child: IconButton(
+                    onPressed: () => {
+                      Navigator.of(context).pop(),
+                    },
+                    icon: Icon(
+                      Icons.circle,
+                      color: Colors.green,
+                      size: 18,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+        automaticallyImplyLeading: false,
+        /*  leading: Container(
+          width: 100,
+          child: Row(
+            children: [
+              Container(
+                width: 33,
+                child: IconButton(
+                  onPressed: () => {},
+                  icon: Icon(
+                    Icons.circle,
+                    color: Colors.red,
+                    size: 16,
+                  ),
+                ),
+              ),
+              Container(
+                width: 25,
+                child: IconButton(
+                  onPressed: () => {},
+                  icon: Icon(
+                    Icons.circle,
+                    color: Colors.orangeAccent,
+                    size: 16,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ), */
       ),
       body: Container(
         child: Column(
@@ -49,10 +123,10 @@ class TerminalScreenSate extends State<TerminalScreen> {
                           textAlign: TextAlign.start,
                           style: TextStyle(
                             color: message.type == 'output'
-                                ? Colors.green
-                                : Colors.blue,
+                                ? Colors.lightGreenAccent
+                                : Colors.lightBlueAccent,
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            //fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -118,6 +192,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
               child:  */
 
             SlidingUpPanel(
+              minHeight: 60,
               //backdropColor: Colors.black,
               //color: Colors.black,
               panel: Scaffold(
@@ -125,7 +200,9 @@ class TerminalScreenSate extends State<TerminalScreen> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.black.withOpacity(.1), spreadRadius: 3)
+                        color: Colors.black.withOpacity(.1),
+                        spreadRadius: 3,
+                      )
                     ],
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(15),
@@ -136,23 +213,80 @@ class TerminalScreenSate extends State<TerminalScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: TextField(
-                          controller: controller,
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
+                      Slidable(
+                        actionPane: SlidableDrawerActionPane(),
+                        actionExtentRatio: 0.25,
+                        actions: <Widget>[
+                          IconSlideAction(
+                            caption: 'Clear',
+                            color: Colors.red,
+                            icon: Icons.cleaning_services_rounded,
+                            onTap: () => {
+                              controller.text = '',
+                            },
                           ),
-                          cursorColor: Colors.green,
-                          autocorrect: false,
-                          cursorWidth: 8.0,
-                          onChanged: (onChanged) => {
-                            //controller.text = '',
-                          },
+                        ],
+                        secondaryActions: [
+                          IconSlideAction(
+                            caption: 'Send',
+                            color: Colors.green,
+                            icon: Icons.play_arrow_rounded,
+                            onTap: () async => {
+                              print(controller.text),
+                              terminalNotifier.addMessage(
+                                Message.fromMap(
+                                  {
+                                    'id': 0,
+                                    'message': controller.text,
+                                    'type': 'input',
+                                    'date': terminalNotifier.getDate(),
+                                    'ip': terminalNotifier.getCurrIp()
+                                  },
+                                ),
+                                terminalNotifier.getCurrIp(),
+                              ),
+                              terminalNotifier.addMessage(
+                                Message.fromMap(
+                                  {
+                                    'id': 0,
+                                    'message': await NetworkService.execRequest(
+                                        controller.text,
+                                        terminalNotifier.getCurrIp(),
+                                        terminalNotifier.getCurrToken()),
+                                    'type': 'output',
+                                    'date': terminalNotifier.getDate(),
+                                    'ip': terminalNotifier.getCurrIp()
+                                  },
+                                ),
+                                terminalNotifier.getCurrIp(),
+                              ),
+                              //controller.clear(),
+                              _scrollController.animateTo(
+                                  _scrollController.position.maxScrollExtent +
+                                      56,
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.bounceOut),
+                            },
+                          ),
+                        ],
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: TextField(
+                            controller: controller,
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                            ),
+                            cursorColor: Colors.green,
+                            autocorrect: false,
+                            cursorWidth: 8.0,
+                            onChanged: (onChanged) => {
+                              //controller.text = '',
+                            },
+                          ),
                         ),
                       ),
-                      Row(
+                      /* Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -243,7 +377,7 @@ class TerminalScreenSate extends State<TerminalScreen> {
                             ),
                           ),
                         ],
-                      ),
+                      ), */
                     ],
                   ),
                 ),

@@ -41,7 +41,7 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   final darkTheme = ThemeData(
     primarySwatch: Colors.grey,
-    primaryColor: Colors.black,
+    primaryColor: Colors.grey[900],
     brightness: Brightness.dark,
     backgroundColor: const Color(0xFF212121),
     accentColor: Colors.white,

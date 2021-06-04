@@ -45,14 +45,8 @@ class _MyHomePageState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("CAT WORM"),
+        title: Text("CATWORM"),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.pushNamed(context, "/scanner");
-            },
-          ),
           IconButton(
             icon: Icon(Icons.lightbulb_outline_rounded),
             onPressed: () {
