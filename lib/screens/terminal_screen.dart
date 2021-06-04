@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:server_catworm/models/scanner.dart';
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
 import 'package:server_catworm/notifiers/terminal_notifier.dart';
@@ -44,7 +45,9 @@ class TerminalScreenSate extends State<TerminalScreen> {
                 Container(
                   width: 33,
                   child: IconButton(
-                    onPressed: () => {},
+                    onPressed: () => {
+                      Phoenix.rebirth(context),
+                    },
                     icon: Icon(
                       Icons.circle,
                       color: Colors.orangeAccent,

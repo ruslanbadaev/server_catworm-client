@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:provider/provider.dart';
+import 'dart:async';
+
 import 'package:server_catworm/notifiers/scanner_notifier.dart';
 import 'package:server_catworm/notifiers/theme_notifier.dart';
 import 'package:server_catworm/notifiers/terminal_notifier.dart';
@@ -6,8 +10,6 @@ import 'package:server_catworm/notifiers/server_cards_notifier.dart';
 import 'package:server_catworm/screens/scanner_screen.dart';
 import 'package:server_catworm/screens/terminal_screen.dart';
 import 'package:server_catworm/screens/home_screen.dart';
-import 'package:provider/provider.dart';
-import 'dart:async';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +29,9 @@ Future<void> main() async {
         create: (context) => ServerCardsNotifier(),
       ),
     ],
-    child: MyApp(),
+    child: Phoenix(
+      child: MyApp(),
+    ),
   ));
 }
 
