@@ -8,3 +8,8 @@
 </br>
 <b> light theme for the perverts </b>
 <img src="./screenshots/scr2.png" width="300px">
+<img src="./screenshots/scr3.png" width="300px">
+<img src="./screenshots/scr4.png" width="300px">
+<img src="./screenshots/scr5.png" width="300px">
+<img src="./screenshots/scr6.png" width="300px">
+<img src="./screenshots/scr7.png" width="300px">
